@@ -6,8 +6,8 @@ A simple REST API built with Express.js that supports CRUD operations using an i
 ## Setup Instructions
 
 1. Clone the repo:
-git clone <repo-url>
-cd express-crud-api
+git clone https://github.com/Fidence/User-Api.git
+cd User-Api
 
 
 2. Install dependencies:
