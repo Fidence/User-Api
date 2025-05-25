@@ -1,2 +1,2 @@
-db
+*.db.js
 node_modules
