@@ -4,11 +4,10 @@ const pool = require('./db'); // Assuming db.js exports the pool
 
 
 
-function validateUser(data) {
-    return data.name && data.email && data.age;
-  }
+function validateUser(data) {    return data.name && data.email && data.age;
+}
 
-  router.get("/users", async (req, res) => {
+router.get("/users", async (req, res) => {
     try {
         const users = await pool.query('SELECT * FROM users');
         res.status(200).json(users.rows);
@@ -17,19 +16,20 @@ function validateUser(data) {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 router.get("/users/:id", async (req, res) => {
     const userId = parseInt(req.params.id);
     if (isNaN(userId)) {
-        return res.status(400).json({ message: 'Invalid item ID' });
+        return res.status(400).json({ message: 'Invalid user ID' });
     }
     try {
-        const user = await pool.query('SELECT * FROM items WHERE id = $1', [userId]);
+        const user = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
         if (user.rows.length === 0) {
-            return res.status(404).json({ message: 'Item not found' });
+            return res.status(404).json({ message: 'User not found' });
         }
         res.status(200).json(user.rows[0]);
     } catch (error) {
-        console.error('Error fetching item:', error);
+        console.error('Error fetching user:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
